@@ -1,0 +1,9 @@
+
+input[type="radio"] + label{
+    width:100%;
+}
+
+input[type="radio"]:checked + label{
+    background-color: white;
+    color: black;
+}

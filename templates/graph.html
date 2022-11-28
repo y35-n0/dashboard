@@ -1,0 +1,44 @@
+
+
+<div class="mt-5" style="height:750px">
+    <div class="bg-dark text-white rounded px-5 py-5" style="height:100%">
+        <div class="row" style="height:100%">
+            <div class="col-sm-2">
+                <div class="row">
+                    <input id="section-total" type="radio" name="section" value="total" style="appearance:none" checked>
+                    <label for="section-total" class="pt-3 pl-3 pb-3" onclick="activate('/totalgraph')">
+                        <span>Total</span>
+                    </label>
+                </div>
+                <div class="row">
+                    <input id="section-phone" type="radio" name="section" value="phone" style="appearance:none" >
+                    <label for="section-phone"  class="pt-3 pl-3 pb-3" onclick="activate('/phonegraph')">
+                        <span>Phone</span>
+                    </label>
+                </div>
+                <div class="row">
+                    <input id="section-internet" type="radio" name="section" value="internet" style="appearance:none">
+                    <label for="section-internet" class="pt-3 pl-3 pb-3" onclick="activate('/internetgraph')">
+                        <span>Internet</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- inner graph -->
+            <div class="col-sm-10 h-100">
+                <div id='first-graph-row' class="row bg-white text-black h-100 px-0">
+                    <div id="pie-chart" class="col-3 bg-primary h-100 px-0"></div>
+                    <div id="charge-chart" class="col-3 bg-primary h-100 px-0"></div>
+                    <div id="tenure-chart" class="col-3 bg-primary h-100 px-0"></div>
+                    <div id="method-chart" class="col-3 bg-primary h-100 px-0"></div>
+                </div>
+                <div id='second-graph-row'  class="row bg-white text-black h-50">
+                    <div id="second-pie-chart" class="col-3 bg-primary h-100 px-0"></div>
+                    <div id="second-charge-chart" class="col-3 bg-primary h-100 px-0"></div>
+                    <div id="second-tenure-chart" class="col-3 bg-primary h-100 px-0"></div>
+                    <div id="second-method-chart" class="col-3 bg-primary h-100 px-0"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
