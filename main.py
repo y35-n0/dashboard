@@ -35,6 +35,9 @@ data_df['MultipleLines'] = data_df['MultipleLines'].apply(lambda x: 'No' if x ==
 
 data_df['total'] = 'all'
 
+
+data = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
+data_df = pd.DataFrame(data)
 app = Flask(__name__)
 
 @app.route('/')
@@ -149,6 +152,7 @@ def internetgraph():
                 "streamingpie": streamingpieJSON, "streamingcharges" : streamingchargesJSON, 
                 "streamingtenure": streamingtenureJSON, "streamingmethod" : streamingmethodJSON}
     }
+
     result = json.dumps(result)
     return result
 
