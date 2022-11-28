@@ -4,7 +4,7 @@ import json
 import plotly 
 import plotly.express as px
 
-data = pd.read_csv('C:/Users/NTX550/Desktop/ASAC/web/WA_Fn-UseC_-Telco-Customer-Churn.csv')
+data = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
 data_df = pd.DataFrame(data)
 data_df['InternetService'] = data_df['InternetService'].apply(lambda x: 'Yes' if x == 'DSL' or x == 'Fiber optic' else 'No')
 data_df['OnlineSecurity'] = data_df['OnlineSecurity'].apply(lambda x: 'No' if x == 'No internet service' or x == 'No' else 'Yes')
@@ -76,8 +76,8 @@ def totalgraph():
     result = json.dumps(result)
     return result
 
-@app.route('/telegraph') 
-def telegraph():
+@app.route('/phonegraph') 
+def phonegraph():
     fig1 = px.pie(data_df, values=data_df['MultipleLines'].value_counts(), names=['가입자', '미가입자'], title='MultiLine 가입 여부')
     fig1.update_traces(textposition="inside", textinfo="percent+label")
     telepieJSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
@@ -145,9 +145,10 @@ def internetgraph():
 
     result = {"name" : "internet",
                 "data": {"onlinepie": onlinepieJSON, "onlinecharges" : onlinechargesJSON, 
-                "onlinetenure": onlinetenureJSON, "onlinemethod" : onlinemethodJSON},
+                "onlinetenure": onlinetenureJSON, "onlinemethod" : onlinemethodJSON,
                 "streamingpie": streamingpieJSON, "streamingcharges" : streamingchargesJSON, 
                 "streamingtenure": streamingtenureJSON, "streamingmethod" : streamingmethodJSON}
+    }
     result = json.dumps(result)
     return result
 

@@ -26,7 +26,7 @@
 
     function loadAllInfo(){
         loadCustomerInfo()
-        activate('/total')
+        activate('/totalgraph')
     }
 
     function loadCustomerInfo() {
@@ -77,25 +77,52 @@
     }
 
     function drawTotal(data){
-        var graphs = data['pie']
-        Plotly.newPlot('pie-chart', graphs, {});
+        var first_row = document.getElementById('first-graph-row')
+        var second_row = document.getElementById('second-graph-row')
+        first_row.className = first_row.className.replace('h-50', 'h-100')
+        second_row.style.display = 'none'
+
+        Plotly.newPlot('pie-chart', JSON.parse(data['pie']), {});
+        Plotly.newPlot('charge-chart', JSON.parse(data['charges']), {});
+        Plotly.newPlot('tenure-chart', JSON.parse(data['tenure']), {});
+        Plotly.newPlot('method-chart', JSON.parse(data['method']), {});
     }
 
     function drawPhone(data){
-        var graphs = data['pie']
-        Plotly.newPlot('pie-chart', graphs, {});
+        var first_row = document.getElementById('first-graph-row')
+        var second_row = document.getElementById('second-graph-row')
+        first_row.className = first_row.className.replace('h-50', 'h-100')
+        second_row.style.display = 'none'
+
+        Plotly.newPlot('pie-chart', JSON.parse(data['pie'], {}));
+        Plotly.newPlot('charge-chart', JSON.parse(data['charges']), {});
+        Plotly.newPlot('tenure-chart', JSON.parse(data['tenure']), {});
+        Plotly.newPlot('method-chart', JSON.parse(data['method']), {});
     }
     
     function drawInternet(data){
-        var graphs = data['pie']
-        Plotly.newPlot('pie-chart', graphs, {});
+        var first_row = document.getElementById('first-graph-row')
+        var second_row = document.getElementById('second-graph-row')
+        first_row.className = first_row.className.replace('h-100', 'h-50')
+        second_row.style.display = ''
+
+
+        console.log(Object.keys(data))
+        Plotly.newPlot('pie-chart', JSON.parse(data['onlinepie']), {});
+        Plotly.newPlot('charge-chart', JSON.parse(data['onlinecharges']), {});
+        Plotly.newPlot('tenure-chart', JSON.parse(data['onlinetenure']), {});
+        Plotly.newPlot('method-chart', JSON.parse(data['onlinemethod']), {});
+        Plotly.newPlot('second-pie-chart', JSON.parse(data['streamingpie']), {});
+        Plotly.newPlot('second-charge-chart', JSON.parse(data['streamingcharges']), {});
+        Plotly.newPlot('second-tenure-chart', JSON.parse(data['streamingtenure']), {});
+        Plotly.newPlot('second-method-chart', JSON.parse(data['streamingmethod']), {});
     }
 
 
 
 </script>
 <body class="bg-secondary" onload="loadAllInfo()">
-    <div class="container rounded py-5">
+    <div class="container-fluid rounded py-5">
         <!-- values -->
         <div id="top" class="row g-3">
             <div class="col-sm-3">
@@ -125,26 +152,26 @@
         </div>
 
         <!-- graph -->
-        <div class="mt-5" style="height:600px">
+        <div class="mt-5" style="height:750px">
             <div class="bg-dark text-white rounded px-5 py-5" style="height:100%">
                 <!-- <p class="row fs-5 text-white mb-0">sss</p> -->
                 <div class="row" style="height:100%">
                     <div class="col-sm-2">
                         <div class="row">
                             <input id="section-total" type="radio" name="section" value="total" style="appearance:none" checked>
-                            <label for="section-total" class="pt-3 pl-3 pb-3" onclick="activate('/total')">
+                            <label for="section-total" class="pt-3 pl-3 pb-3" onclick="activate('/totalgraph')">
                                 <span>Total</span>
                             </label>
                         </div>
                         <div class="row">
                             <input id="section-phone" type="radio" name="section" value="phone" style="appearance:none" >
-                            <label for="section-phone"  class="pt-3 pl-3 pb-3" onclick="activate('/phone')">
+                            <label for="section-phone"  class="pt-3 pl-3 pb-3" onclick="activate('/phonegraph')">
                                 <span>Phone</span>
                             </label>
                         </div>
                         <div class="row">
                             <input id="section-internet" type="radio" name="section" value="internet" style="appearance:none">
-                            <label for="section-internet" class="pt-3 pl-3 pb-3" onclick="activate('/internet')">
+                            <label for="section-internet" class="pt-3 pl-3 pb-3" onclick="activate('/internetgraph')">
                                 <span>Internet</span>
                             </label>
                         </div>
@@ -153,16 +180,16 @@
                     <!-- inner graph -->
                     <div class="col-sm-10 h-100">
                         <div id='first-graph-row' class="row bg-white text-black h-100 px-0">
-                            <div id="pie-chart" class="col-3 bg-black h-100 px-0"></div>
-                            <div id="pie-chart" class="col-3 bg-black h-100 px-0"></div>
-                            <div id="pie-chart" class="col-3 bg-black h-100 px-0"></div>
-                            <div id="pie-chart" class="col-3 bg-black h-100 px-0"></div>
+                            <div id="pie-chart" class="col-3 bg-primary h-100 px-0"></div>
+                            <div id="charge-chart" class="col-3 bg-primary h-100 px-0"></div>
+                            <div id="tenure-chart" class="col-3 bg-primary h-100 px-0"></div>
+                            <div id="method-chart" class="col-3 bg-primary h-100 px-0"></div>
                         </div>
-                        <div id='second-graph-row'  class="row bg-white text-black h-0">
-                            <div id="second-pie-chart" class="col-3 bg-black h-100 px-0"></div>
-                            <div id="second-pie-chart" class="col-3 bg-black h-100 px-0"></div>
-                            <div id="second-pie-chart" class="col-3 bg-black h-100 px-0"></div>
-                            <div id="second-pie-chart" class="col-3 bg-black h-100 px-0"></div>
+                        <div id='second-graph-row'  class="row bg-white text-black h-50">
+                            <div id="second-pie-chart" class="col-3 bg-primary h-100 px-0"></div>
+                            <div id="second-charge-chart" class="col-3 bg-primary h-100 px-0"></div>
+                            <div id="second-tenure-chart" class="col-3 bg-primary h-100 px-0"></div>
+                            <div id="second-method-chart" class="col-3 bg-primary h-100 px-0"></div>
                         </div>
                     </div>
                 </div>
